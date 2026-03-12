@@ -1,14 +1,11 @@
 package com.games.minas.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.catalina.User;
+
 
 import java.time.LocalDateTime;
 
@@ -21,10 +18,13 @@ import java.time.LocalDateTime;
 public class Game {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Usuario usuario;
+
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private int duracao;
